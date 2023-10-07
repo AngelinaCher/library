@@ -21,3 +21,14 @@ python main.py
 ## Технологии
 * Python 3.10.12
 * requests 2.31.0
+
+## Структура проекта
+
+* [library_api](library_api)
+   + [library_api.py](library_api%2Flibrary_api.py) - получение данных из API
+* [report](report)
+   + [count_books.py](report%2Fcount_books.py) - формирование списка наличия книг
+   + [report_generator.py](report%2Freport_generator.py) - формирование отчёта
+* [Library_report_2023-10-07T22:42.txt](Library_report_2023-10-07T22%3A42.txt) - пример отчёта
+* [main.py](main.py) - точка входа в программу
+* [requirements.txt](requirements.txt) - файл с необходимыми зависимостями

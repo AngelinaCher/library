@@ -1,3 +1,4 @@
+import os
 from collections import Counter
 from datetime import datetime
 from report.count_books import ListBook
@@ -44,9 +45,17 @@ class Report:
     @staticmethod
     def _write_report(filename: str, available_books: list, unavailable_books: list, last_book_borrower: dict) -> None:
         """ Запись отчёта в файл """
-        with open(filename, "w", encoding="utf-8") as file:
-            file.write("# Доступно в библиотеке:\n")
-            file.writelines(f"- {book[0]} ({book[1]})\n" for book in available_books)
+        try:
+            with open(filename, "w", encoding="utf-8") as file:
+                file.write("# Доступно в библиотеке:\n")
+                file.writelines(f"- {book[0]} ({book[1]})\n" for book in available_books)
 
-            file.write("\n\n# Недоступные книги:\n")
-            file.writelines(f"- {book} - читает {last_book_borrower[book]}\n" for book in unavailable_books)
+                file.write("\n\n# Недоступные книги:\n")
+                file.writelines(f"- {book} - читает {last_book_borrower[book]}\n" for book in unavailable_books)
+        except Exception as e:
+            print(f"Ошибка при записи файла: {e}")
+            try:
+                if os.path.exists(filename):
+                    os.remove(filename)
+            except Exception as e:
+                print(f"Ошибка при удалении файла: {e}")
